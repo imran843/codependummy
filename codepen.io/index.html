@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Editor</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .outer {
+            position: fixed;
+            width: 100%;
+            height: 98%;
+        }
+        .leftsection,
+        .rightsection {
+            float: left;
+            width: 49%;
+            height: 98%;
+            border: 1px solid black;
+        }
+        .uppersection,
+        .lowersection {
+            height: 49.8%;
+            width: 99%;
+            border: 1px solid black;
+        }
+        .lowerleftsection,
+        .lowerrightsection {
+            float: left;
+            width: 49.6%;
+            height: 100%;
+            border: 1px solid black;
+        }
+        #preview {
+            width: 100%;
+            height: 100%;
+        }
+        .header {
+            background: black;
+            color: white;
+            font-weight: bolder;
+            text-align: center;
+            font-size: 30px;
+            height: 30px;
+            width: 100%;
+
+        }
+        .editor {
+            width: 100%;
+            height: calc(100%-30px);
+            overflow: auto;
+        }
+    </style>
+    <script>
+        function showPreview(){
+            var content="";
+            content+="<style>" +  document.getElementById("csseditor").innerText + "<\/style>";
+            content +="<script>" +  document.getElementById("jseditor").innerText + "<\/script>";
+            content +="<body>" + document.getElementById("htmleditor").innerText + "<\/body>";
+            document.getElementById("preview").src = "data:text/html;charset=UTF-8, <html>" + content + "<\/html>";
+
+        }
+    </script>
+</head>
+<body>
+    <div class="outer">
+        <div class="leftsection">
+            <div class="uppersection">
+                <div class="header">HTML Editor</div>
+                <div class="editor" id="htmleditor" contenteditable="true" onkeyup="showPreview()"></div>
+            </div>
+            <div class="lowersection">
+                <div class="lowerleftsection">
+                    <div class="header">CSS Editor</div>
+                    <div class="editor" id="csseditor" contenteditable="true" onkeyup="showPreview()"></div>
+                </div>
+                <div class="lowerrightsection">
+                    <div class="header">JS Editor</div>
+                    <div class="editor" id="jseditor" contenteditable="true" onkeyup="showPreview()"></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightsection">
+            <iframe id="preview"></iframe>
+        </div>
+    </div>
+</body>
+</html>
